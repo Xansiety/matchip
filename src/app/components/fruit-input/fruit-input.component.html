@@ -1,0 +1,41 @@
+<div [formGroup]="parentForm" *ngIf="parentForm">
+      {{ selectedOptions | json }}
+      <mat-form-field appearance="outline">
+        <mat-chip-list
+          #fruitList
+          [required]="isRequired"
+          formControlName="fruits"
+        >
+          <mat-chip
+            *ngFor="let fruit of selectedOptions"
+            [removable]="removable"
+            (removed)="remove(fruit)"
+          >
+            {{ fruit.name }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            #fruitInput
+            placeholder="Add your favorite fruits"
+            [matChipInputFor]="fruitList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addFruit($event)"
+            [matAutocomplete]="fruitsAutocomplete"
+            formControlName="fruitInput"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #fruitsAutocomplete="matAutocomplete"
+          (optionSelected)="selectFruit($event)"
+        >
+          <mat-option
+            *ngFor="let fruit of filteredFruits$ | async"
+            [value]="fruit"
+          >
+            {{ fruit.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="hasError('fruits', 'required')">Required </mat-error>
+      </mat-form-field>
+    </div>

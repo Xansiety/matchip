@@ -21,11 +21,11 @@ export class AppComponent implements OnInit {
   public userForm!: FormGroup;
   public user!: User;
   public fruits = [
-    { id: 1, name: 'lemon' },
-    { id: 2, name: 'lime' },
-    { id: 3, name: 'orange' },
-    { id: 4, name: 'strawberry' },
-    { id: 5, name: 'raspberry' },
+    { value: 1, description: 'lemon' },
+    { value: 2, description: 'lime' },
+    { value: 3, description: 'orange' },
+    { value: 4, description: 'strawberry' },
+    { value: 5, description: 'raspberry' },
   ];
 
   constructor(public fb: FormBuilder) {}
